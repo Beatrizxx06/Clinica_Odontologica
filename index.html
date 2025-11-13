@@ -330,6 +330,100 @@
         float: none; /* Remove flutuações que podem quebrar o layout */
     }
 }
+    /* ======== RESPONSIVIDADE MOBILE ======== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+    text-align: center;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 8px;
+  }
+
+  section {
+    padding: 40px 20px;
+  }
+
+  .hero img {
+    height: 280px;
+  }
+
+  .hero-text h2 {
+    font-size: 24px;
+  }
+
+  .hero-text p {
+    font-size: 16px;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .team-photos {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .team-photos img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-card {
+    width: 90%;
+  }
+
+  .form-box {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .form-left, .form-right {
+    padding: 30px 20px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text h2 {
+    font-size: 20px;
+  }
+
+  .hero-text p {
+    font-size: 14px;
+  }
+
+  header h1 {
+    font-size: 22px;
+  }
+
+  .card h3, .info-section h3 {
+    font-size: 20px;
+  }
+
+  .form-right h3 {
+    font-size: 22px;
+  }
+}
 
   </style>
 </head>
@@ -340,7 +434,7 @@
       <img src="https://i.pinimg.com/736x/72/5b/84/725b84327e81b6e96f0d57965dc796f6.jpg" alt="Logo Sorriso Real">
       <h1>Sorriso Real</h1>
     </div>
-    <nav>
+    <nav class="navbar">
       <a onclick="mostrar('home')">Início</a>
       <a onclick="mostrar('login')">Login</a>
       <a onclick="mostrar('cadastro')" class="btn-blue">Cadastro</a>
@@ -353,7 +447,7 @@
     <div class="hero">
       <img src="https://villaodontologia.com.br/wp-content/uploads/2019/09/Blog.png" alt="Banner da clínica">
       <div class="hero-text">
-        <h2>Seu sorriso é o nosso maior orgulho 😁</h2>
+        <h2>Seu sorriso é o nosso maior orgulho </h2>
         <p>Atendimento odontológico completo com tecnologia de ponta e cuidado humanizado.</p>
         <button onclick="mostrar('agendamento')">Agende sua consulta</button>
       </div>
@@ -406,19 +500,19 @@
       <h3>Fale Conosco</h3>
       <div class="contact-info">
         <div class="contact-card">
-          <h4>📍 Endereço</h4>
+          <h4> Endereço</h4>
           <p>  Rua das Flores, 123 - São Paulo/SP</p>
         </div>
         <div class="contact-card">
-          <h4>☎️ Telefone</h4>
+          <h4> Telefone</h4>
           <p> (11) 95946-8827</p>
         </div>
         <div class="contact-card">
-          <h4>📧 E-mail</h4>
+          <h4> E-mail</h4>
           <p>contato@sorrisoreal.com.br</p>
         </div>
         <div class="contact-card">
-          <h4>🕒 Atendimento</h4>
+          <h4> Atendimento</h4>
           <p>Seg a Sex: 8h às 18h<br>Sábado: 8h às 12h</p>
         </div>
       </div>
@@ -501,4 +595,5 @@
   </script>
 </body>
 </html>
+
 
