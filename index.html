@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sorriso Real</title>
   <link rel="icon" href="https://i.pinimg.com/736x/97/ca/9f/97ca9f992b7285aa86813281044f095f.jpg" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     /* ======== RESET ======== */
     * {
@@ -322,6 +323,14 @@
       font-size: 14px;
       border-top: 1px solid #eee;
     }
+    @media screen and (max-width: 768px) {
+    /* Estilos específicos para telas menores que 768px (como celulares) */
+    .sua-classe {
+        width: 100%; /* Define a largura total para melhor visualização móvel */
+        float: none; /* Remove flutuações que podem quebrar o layout */
+    }
+}
+
   </style>
 </head>
 <body>
@@ -492,3 +501,4 @@
   </script>
 </body>
 </html>
+
