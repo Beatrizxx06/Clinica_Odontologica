@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <!-- Meta viewport correto (apenas um) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sorriso Real</title>
   <link rel="icon" href="https://i.pinimg.com/736x/97/ca/9f/97ca9f992b7285aa86813281044f095f.jpg" type="image/png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     /* ======== RESET ======== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    html, body { height: 100%; }
     body {
       background: #f4f8fc;
       color: #333;
       scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    img { max-width: 100%; display: block; height: auto; }
 
     /* ======== CORES PRINCIPAIS ======== */
     :root {
@@ -35,565 +29,326 @@
       --cinza-claro: #f8fbfe;
     }
 
+    /* ======== LAYOUT PRINCIPAL ======== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
     /* ======== CABEÇALHO ======== */
     header {
       background: #fff;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 60px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 14px 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 200;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+    .logo h1 { color: var(--azul-principal); font-size: 20px; font-weight: 700; }
 
-    .logo img {
-      width: 55px;
-      height: 55px;
-      object-fit: cover;
+    /* Nav padrão (desktop) */
+    nav.navbar { display: flex; gap: 12px; align-items: center; }
+    nav.navbar a {
+      text-decoration: none; color: #333; margin-left: 6px; font-weight: 500;
+      padding: 8px 10px; border-radius: 8px;
     }
+    nav.navbar a.btn-blue { background: var(--azul-principal); color: #fff; }
+    nav.navbar a.btn-green { background: var(--verde-suave); color: #fff; }
 
-    .logo h1 {
-      color: var(--azul-principal);
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+    /* ======== Menu Mobile (checkbox hack) ======== */
+    .nav-toggle { display: none; }
+    .nav-toggle-label {
+      display: none;
+      width: 44px; height: 44px; border-radius: 10px; align-items: center; justify-content: center;
+      cursor: pointer; background: transparent; border: 1px solid transparent;
     }
-
-    nav a {
-      text-decoration: none;
-      color: #333;
-      margin-left: 20px;
-      font-weight: 500;
-      transition: 0.3s;
-      cursor: pointer;
+    .nav-toggle-label span {
+      display: block; width: 22px; height: 2px; background: #333; position: relative;
     }
-
-    nav a:hover {
-      color: var(--azul-principal);
+    .nav-toggle-label span::before, .nav-toggle-label span::after {
+      content: ""; position: absolute; left: 0; right: 0; height: 2px; background: #333;
     }
-
-    .btn-blue {
-      background: var(--azul-principal);
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-
-    .btn-green {
-      background: var(--verde-suave);
-      color: #fff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-    }
+    .nav-toggle-label span::before { top: -7px; }
+    .nav-toggle-label span::after { top: 7px; }
 
     /* ======== SEÇÕES ======== */
-    section {
-      display: none;
-      padding: 70px 80px;
-    }
-
-    section.active {
-      display: block;
-      animation: fadeIn 0.6s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    section { display: none; padding: 48px 0; }
+    section.active { display: block; animation: fadeIn 0.45s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     /* ======== HERO ======== */
-    .hero {
-      position: relative;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .hero img {
-      width: 100%;
-      height: 420px;
-      object-fit: cover;
-      filter: brightness(0.75);
-    }
-
+    .hero { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+    .hero img { width: 100%; height: 420px; object-fit: cover; filter: brightness(0.65); }
     .hero-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #dbf8f7;
-      text-align: center;
-      backdrop-filter: blur(2px);
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      color: #fff; text-align: center; padding: 0 16px;
     }
+    .hero-text h2 { font-size: 34px; margin-bottom: 8px; text-shadow: 0 4px 18px rgba(0,0,0,0.35); }
+    .hero-text p { font-size: 16px; margin-bottom: 12px; }
 
-    .hero-text h2 {
-      font-size: 38px;
-      margin-bottom: 10px;
-      text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+    button, .btn {
+      padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer;
+      background: var(--azul-principal); color: #fff; font-weight: 600;
     }
-
-    .hero-text p {
-      margin-bottom: 25px;
-      font-size: 18px;
-    }
-
-    button {
-      padding: 12px 22px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background: var(--azul-principal);
-      color: white;
-      transition: 0.3s;
-      font-weight: 500;
-    }
-
-    button:hover {
-      background: #005da3;
-    }
+    button.secondary { background: #666; }
 
     /* ======== SEÇÕES INFORMATIVAS ======== */
-    .info-section {
-      text-align: center;
-      margin: 80px auto;
-      max-width: 1000px;
-    }
-
-    .info-section h3 {
-      color: var(--azul-principal);
-      margin-bottom: 25px;
-      font-size: 28px;
-      position: relative;
-    }
-
-    .info-section h3::after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 3px;
-      background: var(--azul-principal);
-      margin: 10px auto;
-      border-radius: 3px;
-    }
-
-    .cards {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 25px;
-      margin-top: 25px;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      padding: 30px;
-      width: 280px;
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-    }
-
-    .card h4 {
-      color: var(--azul-principal);
-      margin-bottom: 10px;
-    }
+    .info-section { text-align: center; margin: 48px auto; max-width: 1100px; }
+    .info-section h2, .info-section h3 { color: var(--azul-principal); margin-bottom: 18px; font-size: 26px; }
+    .cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; margin-top: 18px; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); padding: 20px; width: 260px; transition: transform .22s; }
+    .card:hover { transform: translateY(-6px); }
 
     /* ======== EQUIPE ======== */
-    .team-section {
-      margin-top: 80px;
-      text-align: center;
-    }
-
-    .team-photos {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-top: 30px;
-    }
-
-    .team-photos img {
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-      border: 5px solid var(--cinza-claro);
-    }
+    .team-section { margin-top: 36px; text-align: center; }
+    .team-photos { display: flex; justify-content: center; flex-wrap: wrap; gap: 22px; margin-top: 18px; }
+    .team-photos img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; box-shadow: 0 6px 20px rgba(0,0,0,0.08); border: 5px solid var(--cinza-claro); }
 
     /* ======== CONTATO ======== */
-    
-    .contact-section {
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 60px;
-      margin-top: 90px;
-      text-align: center;
-    }
-
-    .contact-section h3 {
-      color: var(--azul-principal);
-      margin-bottom: 40px;
-      font-size: 28px;
-    }
-
-    .contact-info {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-
-    .contact-card {
-      background: var(--cinza-claro);
-      border-radius: 12px;
-      padding: 25px;
-      width: 230px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .contact-card h4 {
-      color: var(--azul-principal);
-      margin-bottom: 10px;
-    }
+    .contact-section { background: #fff; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.05); padding: 30px; margin-top: 36px; text-align: center; }
+    .contact-info { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+    .contact-card { background: var(--cinza-claro); border-radius: 10px; padding: 18px; width: 220px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 
     /* ======== FORMULÁRIOS ======== */
-    .form-box {
-      display: flex;
-      background: #fff;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      width: 85%;
-      max-width: 1000px;
-      margin: auto;
+    .form-box { display: flex; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08); width: 100%; max-width: 1000px; margin: 20px auto; }
+    .form-left { flex: 1; background: linear-gradient(135deg, var(--azul-principal), var(--verde-suave)); color: white; padding: 28px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+    .form-right { flex: 1.2; padding: 28px; text-align: left; }
+    input[type="text"], input[type="email"], input[type="password"], input[type="date"], select, textarea {
+      width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 15px; background: var(--cinza-claro);
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--azul-claro); border-color: transparent; }
+
+    footer { text-align: center; padding: 20px; background: #fff; color: #666; margin-top: 40px; font-size: 14px; border-top: 1px solid #eee; }
+
+    /* ======== RESPONSIVIDADE ======== */
+    @media (max-width: 980px) {
+      .hero img { height: 320px; }
+      .hero-text h2 { font-size: 28px; }
+      .logo h1 { font-size: 18px; }
+      .card { width: 220px; }
+      .team-photos img { width: 180px; height: 180px; }
     }
 
-    .form-left {
-      flex: 1;
-      background: linear-gradient(135deg, var(--azul-principal), var(--verde-suave));
-      color: white;
-      padding: 50px 30px;
+    /* Menu mobile behaviors */
+    @media (max-width: 860px) {
+      nav.navbar { position: absolute; top: 72px; right: 16px; background: #fff; flex-direction: column; padding: 12px; gap: 6px; border-radius: 10px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); display: none; }
+      .nav-toggle-label { display: flex; }
+      .nav-open nav.navbar { display: flex; }
+      header { padding: 12px 16px; }
     }
 
-    .form-right {
-      flex: 1.5;
-      padding: 50px;
-      text-align: left;
+    @media (max-width: 700px) {
+      .hero img { height: 240px; }
+      .hero-text h2 { font-size: 22px; }
+      .hero-text p { font-size: 14px; }
+      .cards { gap: 12px; }
+      .card { width: 92%; }
+      .contact-card { width: 92%; }
+      .form-box { flex-direction: column; padding: 12px; width: 96%; }
+      .form-left, .form-right { padding: 18px; }
+      button, .btn { width: 100%; }
     }
 
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 12px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-      background: var(--cinza-claro);
+    @media (max-width: 420px) {
+      .logo img { width: 44px; height: 44px; }
+      .logo h1 { font-size: 16px; }
+      .team-photos img { width: 150px; height: 150px; }
+      .hero-text h2 { font-size: 20px; }
+      .hero-text p { font-size: 13px; }
     }
 
-    input:focus, select:focus {
-      outline: 2px solid var(--azul-claro);
-      border-color: transparent;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #fff;
-      color: #666;
-      margin-top: 80px;
-      font-size: 14px;
-      border-top: 1px solid #eee;
-    }
-    @media screen and (max-width: 768px) {
-    /* Estilos específicos para telas menores que 768px (como celulares) */
-    .sua-classe {
-        width: 100%; /* Define a largura total para melhor visualização móvel */
-        float: none; /* Remove flutuações que podem quebrar o layout */
-    }
-}
-    /* ======== RESPONSIVIDADE MOBILE ======== */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-    padding: 15px 20px;
-    text-align: center;
-  }
-
-  nav a {
-    display: inline-block;
-    margin: 8px;
-  }
-
-  section {
-    padding: 40px 20px;
-  }
-
-  .hero img {
-    height: 280px;
-  }
-
-  .hero-text h2 {
-    font-size: 24px;
-  }
-
-  .hero-text p {
-    font-size: 16px;
-  }
-
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 90%;
-  }
-
-  .team-photos {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .team-photos img {
-    width: 180px;
-    height: 180px;
-  }
-
-  .contact-info {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-card {
-    width: 90%;
-  }
-
-  .form-box {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .form-left, .form-right {
-    padding: 30px 20px;
-  }
-
-  button {
-    width: 100%;
-    margin-top: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-text h2 {
-    font-size: 20px;
-  }
-
-  .hero-text p {
-    font-size: 14px;
-  }
-
-  header h1 {
-    font-size: 22px;
-  }
-
-  .card h3, .info-section h3 {
-    font-size: 20px;
-  }
-
-  .form-right h3 {
-    font-size: 22px;
-  }
-}
-
+    /* small visual tweak for links on mobile when stacked */
+    nav.navbar a { white-space: nowrap; }
   </style>
 </head>
 <body>
-  <!-- Cabeçalho -->
-  <header>
-    <div class="logo">
-      <img src="https://i.pinimg.com/736x/72/5b/84/725b84327e81b6e96f0d57965dc796f6.jpg" alt="Logo Sorriso Real">
-      <h1>Sorriso Real</h1>
+  <header id="site-header" class="">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="logo">
+          <img src="https://i.pinimg.com/736x/72/5b/84/725b84327e81b6e96f0d57965dc796f6.jpg" alt="Logo Sorriso Real">
+          <h1>Sorriso Real</h1>
+        </div>
+      </div>
+
+      <!-- botão hamburguer -->
+      <button class="nav-toggle-label" id="nav-toggle" aria-label="Abrir menu" title="Menu">
+        <span></span>
+      </button>
+
+      <nav class="navbar" id="main-nav" aria-label="Navegação principal">
+        <a onclick="mostrar('home')" role="button">Início</a>
+        <a onclick="mostrar('login')" role="button">Login</a>
+        <a onclick="mostrar('cadastro')" class="btn-blue" role="button">Cadastro</a>
+        <a onclick="mostrar('agendamento')" class="btn-green" role="button">Agendar</a>
+      </nav>
     </div>
-    <nav class="navbar">
-      <a onclick="mostrar('home')">Início</a>
-      <a onclick="mostrar('login')">Login</a>
-      <a onclick="mostrar('cadastro')" class="btn-blue">Cadastro</a>
-      <a onclick="mostrar('agendamento')" class="btn-green">Agendar</a>
-    </nav>
   </header>
 
-  <!-- Início -->
-  <section id="home" class="active">
-    <div class="hero">
-      <img src="https://villaodontologia.com.br/wp-content/uploads/2019/09/Blog.png" alt="Banner da clínica">
-      <div class="hero-text">
-        <h2>Seu sorriso é o nosso maior orgulho </h2>
-        <p>Atendimento odontológico completo com tecnologia de ponta e cuidado humanizado.</p>
-        <button onclick="mostrar('agendamento')">Agende sua consulta</button>
+  <main>
+    <section id="home" class="active container">
+      <div class="hero">
+        <img src="https://villaodontologia.com.br/wp-content/uploads/2019/09/Blog.png" alt="Banner da clínica">
+        <div class="hero-text">
+          <h2>Seu sorriso é o nosso maior orgulho</h2>
+          <p>Atendimento odontológico completo com tecnologia de ponta e cuidado humanizado.</p>
+          <button onclick="mostrar('agendamento')">Agende sua consulta</button>
+        </div>
       </div>
-    </div>
-  <!-- Serviços -->
-   <div class="info-section">
-    <h2>Nossos Tratamentos</h2>
-    <div class="cards">
-      <div class="card"><h3>Clareamento Dentário</h3><p>Recupere o brilho natural do seu sorriso com segurança e eficácia.</p></div>
-      <div class="card"><h3>Implante</h3><p>Reposição de dentes perdidos com conforto e aparência natural.</p></div>
-      <div class="card"><h3>Ortodontia</h3><p>Aparelhos modernos e discretos para alinhar seus dentes com perfeição.</p></div>
-      <div class="card"><h3>Tratamento de Canal</h3><p>Elimine dores e preserve a estrutura natural dos dentes.</p></div>
-      <div class="card"><h3>Estética Facial</h3><p>Harmonização facial para realçar sua beleza com naturalidade.</p></div>
-      <div class="card"><h3>Limpeza</h3><p>Remoção de tártaro e placas bacterianas para um sorriso mais saudável.</p></div>
-      <div class="card"><h3>Restauração</h3><p>Recupere dentes danificados e devolva o visual perfeito.</p></div>
-      <div class="card"><h3>Cirurgia</h3><p>Procedimentos cirúrgicos odontológicos com precisão e segurança.</p></div>
-    </div>
-    </div>
 
-     <!--Escolher o nosso site -->
-    <div class="info-section">
-      <h3>Por que escolher a Sorriso Real?</h3>
-      <div class="cards">
-        <div class="card">
-          <h4>Profissionais Qualificados</h4>
-          <p>Equipe experiente e apaixonada pelo que faz.</p>
-        </div>
-        <div class="card">
-          <h4>Atendimento Humanizado</h4>
-          <p>Nosso foco é o seu conforto e confiança.</p>
-        </div>
-        <div class="card">
-          <h4>Tecnologia Avançada</h4>
-          <p>Equipamentos modernos e procedimentos seguros.</p>
+      <!-- Serviços -->
+      <div class="info-section">
+        <h2>Nossos Tratamentos</h2>
+        <div class="cards">
+          <div class="card"><h3>Clareamento Dentário</h3><p>Recupere o brilho natural do seu sorriso com segurança e eficácia.</p></div>
+          <div class="card"><h3>Implante</h3><p>Reposição de dentes perdidos com conforto e aparência natural.</p></div>
+          <div class="card"><h3>Ortodontia</h3><p>Aparelhos modernos e discretos para alinhar seus dentes com perfeição.</p></div>
+          <div class="card"><h3>Tratamento de Canal</h3><p>Elimine dores e preserve a estrutura natural dos dentes.</p></div>
+          <div class="card"><h3>Estética Facial</h3><p>Harmonização facial para realçar sua beleza com naturalidade.</p></div>
+          <div class="card"><h3>Limpeza</h3><p>Remoção de tártaro e placas bacterianas para um sorriso mais saudável.</p></div>
+          <div class="card"><h3>Restauração</h3><p>Recupere dentes danificados e devolva o visual perfeito.</p></div>
+          <div class="card"><h3>Cirurgia</h3><p>Procedimentos cirúrgicos odontológicos com precisão e segurança.</p></div>
         </div>
       </div>
-    </div>
 
-<!-- Nossa equipe -->
-    <div class="team-section">
-      <h3>Conheça Nossa Equipe</h3>
-      <div class="team-photos">
-        <img src="https://i.pinimg.com/1200x/b1/5b/b8/b15bb80a480a9fd00c335cc068396735.jpg" alt="Doutor Daniel">
-        <img src="https://i.pinimg.com/1200x/4e/5c/50/4e5c5080e03592b58eb47c5b9a71bb28.jpg" alt="Doutor jonas">
-        <img src="https://i.pinimg.com/736x/c1/4b/e5/c14be5af2e55907a4cc5a9af2e4ffa41.jpg" alt="Doutora Juliana">
-      </div>
-    </div>
-<!--Contato-->
-    <div class="contact-section">
-      <h3>Fale Conosco</h3>
-      <div class="contact-info">
-        <div class="contact-card">
-          <h4> Endereço</h4>
-          <p>  Rua das Flores, 123 - São Paulo/SP</p>
-        </div>
-        <div class="contact-card">
-          <h4> Telefone</h4>
-          <p> (11) 95946-8827</p>
-        </div>
-        <div class="contact-card">
-          <h4> E-mail</h4>
-          <p>contato@sorrisoreal.com.br</p>
-        </div>
-        <div class="contact-card">
-          <h4> Atendimento</h4>
-          <p>Seg a Sex: 8h às 18h<br>Sábado: 8h às 12h</p>
+      <div class="info-section">
+        <h3>Por que escolher a Sorriso Real?</h3>
+        <div class="cards" style="justify-content:center;">
+          <div class="card"><h4>Profissionais Qualificados</h4><p>Equipe experiente e apaixonada pelo que faz.</p></div>
+          <div class="card"><h4>Atendimento Humanizado</h4><p>Nosso foco é o seu conforto e confiança.</p></div>
+          <div class="card"><h4>Tecnologia Avançada</h4><p>Equipamentos modernos e procedimentos seguros.</p></div>
         </div>
       </div>
-    </div>
-  </section>
-  
 
-  <!-- Login -->
-  <section id="login">
-    <div class="form-box">
-      <div class="form-left">
-        <h3>Bem-vindo(a) de volta!</h3>
-        <p>Entre com seus dados para acessar sua conta.</p>
+      <div class="team-section">
+        <h3>Conheça Nossa Equipe</h3>
+        <div class="team-photos">
+          <img src="https://i.pinimg.com/1200x/b1/5b/b8/b15bb80a480a9fd00c335cc068396735.jpg" alt="Doutor Daniel">
+          <img src="https://i.pinimg.com/1200x/4e/5c/50/4e5c5080e03592b58eb47c5b9a71bb28.jpg" alt="Doutor Jonas">
+          <img src="https://i.pinimg.com/736x/c1/4b/e5/c14be5af2e55907a4cc5a9af2e4ffa41.jpg" alt="Doutora Juliana">
+        </div>
       </div>
-      <div class="form-right">
-        <h3>Login</h3>
-        <input type="email" placeholder="E-mail">
-        <input type="password" placeholder="Senha">
-        <button>Entrar</button>
-        <button onclick="mostrar('home')">Voltar</button>
-      </div>
-    </div>
-  </section>
 
-  <!-- Cadastro -->
-  <section id="cadastro">
-    <div class="form-box">
-      <div class="form-left">
-        <h3>Seja parte da família Sorriso Real!</h3>
-        <p>Cadastre-se e aproveite nossos benefícios.</p>
+      <div class="contact-section">
+        <h3>Fale Conosco</h3>
+        <div class="contact-info">
+          <div class="contact-card"><h4>Endereço</h4><p>Rua das Flores, 123 - São Paulo/SP</p></div>
+          <div class="contact-card"><h4>Telefone</h4><p>(11) 95946-8827</p></div>
+          <div class="contact-card"><h4>E-mail</h4><p>contato@sorrisoreal.com.br</p></div>
+          <div class="contact-card"><h4>Atendimento</h4><p>Seg a Sex: 8h às 18h<br>Sábado: 8h às 12h</p></div>
+        </div>
       </div>
-      <div class="form-right">
-        <h3>Cadastro</h3>
-        <input type="text" placeholder="Nome completo">
-        <input type="email" placeholder="E-mail">
-        <input type="text" placeholder="Telefone">
-        <input type="password" placeholder="Senha">
-        <button>Cadastrar</button>
-        <button onclick="mostrar('home')">Voltar</button>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Agendamento -->
-  <section id="agendamento">
-    <div class="form-box">
-      <div class="form-left">
-        <h3>Agende sua consulta</h3>
-        <p>Escolha o melhor dia e horário para seu atendimento.</p>
+    <!-- Login -->
+    <section id="login" class="container">
+      <div class="form-box">
+        <div class="form-left">
+          <h3>Bem-vindo(a) de volta!</h3>
+          <p>Entre com seus dados para acessar sua conta.</p>
+        </div>
+        <div class="form-right">
+          <h3>Login</h3>
+          <label for="email-login" style="display:none">E-mail</label>
+          <input id="email-login" type="email" placeholder="E-mail">
+          <label for="senha-login" style="display:none">Senha</label>
+          <input id="senha-login" type="password" placeholder="Senha">
+          <button onclick="alert('Função de login não implementada')">Entrar</button>
+          <button class="secondary" onclick="mostrar('home')">Voltar</button>
+        </div>
       </div>
-      <div class="form-right">
-        <h3>Agendamento</h3>
-        <input type="text" placeholder="Nome completo">
-        <input type="email" placeholder="E-mail">
-        <input type="text" placeholder="Telefone">
-        <select>
-          <option>Selecione o tipo de tratamento</option>
-          <option>Clareamento</option>
-          <option>Limpeza</option>
-          <option>Implante</option>
-          <option>Ortodontia</option>
-        </select>
-        <input type="date">
-        <button>Confirmar</button>
-        <button onclick="mostrar('home')">Voltar</button>
+    </section>
+
+    <!-- Cadastro -->
+    <section id="cadastro" class="container">
+      <div class="form-box">
+        <div class="form-left">
+          <h3>Seja parte da família Sorriso Real!</h3>
+          <p>Cadastre-se e aproveite nossos benefícios.</p>
+        </div>
+        <div class="form-right">
+          <h3>Cadastro</h3>
+          <input type="text" placeholder="Nome completo">
+          <input type="email" placeholder="E-mail">
+          <input type="text" placeholder="Telefone">
+          <input type="password" placeholder="Senha">
+          <button onclick="alert('Função de cadastro não implementada')">Cadastrar</button>
+          <button class="secondary" onclick="mostrar('home')">Voltar</button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Agendamento -->
+    <section id="agendamento" class="container">
+      <div class="form-box">
+        <div class="form-left">
+          <h3>Agende sua consulta</h3>
+          <p>Escolha o melhor dia e horário para seu atendimento.</p>
+        </div>
+        <div class="form-right">
+          <h3>Agendamento</h3>
+          <input type="text" placeholder="Nome completo">
+          <input type="email" placeholder="E-mail">
+          <input type="text" placeholder="Telefone">
+          <select>
+            <option>Selecione o tipo de tratamento</option>
+            <option>Clareamento</option>
+            <option>Limpeza</option>
+            <option>Implante</option>
+            <option>Ortodontia</option>
+          </select>
+          <input type="date">
+          <button onclick="alert('Agendamento não conectado')">Confirmar</button>
+          <button class="secondary" onclick="mostrar('home')">Voltar</button>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>© 2025 Sorriso Real — Todos os direitos reservados.</p>
   </footer>
 
   <script>
+    // Função para trocar seções
     function mostrar(id) {
       document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      window.scrollTo(0, 0);
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+      // fecha menu mobile quando navegar
+      document.body.classList.remove('nav-open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // Toggle do menu mobile (botão hamburguer)
+    const navToggle = document.getElementById('nav-toggle');
+    const header = document.getElementById('site-header');
+    navToggle.addEventListener('click', () => {
+      document.body.classList.toggle('nav-open');
+      // toggle class para mostrar nav
+      header.classList.toggle('nav-open');
+    });
+
+    // fechar menu ao clicar fora (opcional)
+    document.addEventListener('click', (e) => {
+      const nav = document.getElementById('main-nav');
+      const toggle = document.getElementById('nav-toggle');
+      if (!nav.contains(e.target) && !toggle.contains(e.target) && window.innerWidth <= 860) {
+        document.body.classList.remove('nav-open');
+        header.classList.remove('nav-open');
+      }
+    });
+
+    // melhorar comportamento ao redimensionar
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 860) {
+        document.body.classList.remove('nav-open');
+        header.classList.remove('nav-open');
+      }
+    });
   </script>
 </body>
 </html>
-
-
